@@ -1,0 +1,33 @@
+.exit{
+    background: grey;
+    margin-left: 5px;
+    margin-top: 5px;
+    border-radius: 50px;
+    padding: 5px;
+    color: white;
+    margin-left: 90%;
+}
+
+
+.header{
+    font-weight: bold;
+    text-align: center;
+}
+
+.actions{
+    margin: 10px;
+}
+
+.action{
+    height: 50px;
+    margin-top: 10%;
+}
+
+.facebook{
+    --background: linear-gradient(to top right, blue, purple);
+}
+
+.google{
+    --background: rgb(235, 235, 241);
+    --color: black;
+}

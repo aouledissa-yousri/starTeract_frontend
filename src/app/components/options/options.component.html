@@ -1,0 +1,21 @@
+<div (click) = "closeModal()">
+  <ion-icon class = "exit" name = "close"></ion-icon>
+</div>
+<h5 class = "header">{{modal.header}}</h5>
+
+<div class = "actions">
+
+  <ion-button expand = "block" class = "facebook action">
+    <ion-icon name = "logo-facebook" style = "color: white"></ion-icon> &nbsp;
+    <b>{{modal.button1}}</b>
+  </ion-button>
+
+  <ion-button expand = "block" class = "google action">
+    <ion-icon name = "logo-google" style = "color: black"></ion-icon> &nbsp;
+    <b>{{modal.button2}}</b>
+  </ion-button>
+  
+  <ion-button color = "success" expand = "block" class = "email action" (click) = "normalSignUp()">
+    <b>{{modal.button3}}</b>
+  </ion-button>
+</div>

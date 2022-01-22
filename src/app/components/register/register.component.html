@@ -1,0 +1,33 @@
+<div class = "container">
+  <ion-icon name = "chevron-back-outline" class = "back"></ion-icon>
+  <h1 class = "label">Registration</h1>
+
+
+
+  <form [formGroup] = "form" (ngSubmit) = "signUp()">
+    <ion-item>
+      <ion-label position = "floating">Name</ion-label>
+      <ion-input type = "text" placeholder = "Enter your name" class = "input" formControlName = "name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position = "floating">Email</ion-label>
+      <ion-input type = "text" placeholder = "ex: xyz@email.com" class = "input" formControlName = "email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position = "floating">Password</ion-label>
+      <ion-input type = "password" placeholder = "Must be atleast 8 characters long" class = "input" formControlName = "password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position = "floating">Phone number</ion-label>
+      <ion-input type = "number" class = "input" formControlName = "phone"></ion-input>
+    </ion-item><br><br>
+
+    <ion-button expand = "block" class = "join" type = "submit">Join As Normal User</ion-button>
+    <ion-button expand = "block" class = "join" type = "button">Join As Talent</ion-button>
+  </form>
+
+
+</div>

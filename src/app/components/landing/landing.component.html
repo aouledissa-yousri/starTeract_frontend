@@ -1,0 +1,24 @@
+<div class = "container">
+  <div class = "header">
+    <ion-img [src] = "image" class = "logo-starzly"></ion-img>
+    <div class = "header-text">
+      <h1 style = "font-weight: bold">Make Someone's day</h1>
+      <h5 style = "overflow-wrap: break-word">Get a Unique Experiece from your favorite star</h5>
+    </div>
+  </div>
+  
+  
+  <div class = "actions">
+    <ion-button color = "dark" class = "action" (click) = "openModal($event)">Login</ion-button> 
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    <ion-button color = "dark" class = "action" (click) = "openModal($event)">Sign up</ion-button>
+  </div>
+</div>
+
+
+
+<ion-modal [isOpen] = "isModalOpen" class = "half">
+  <ng-template>
+    <app-options (onClose) = "closeModal($event)" (onAction) = "normalSignUp($event)" [modal] = "modal"></app-options>
+  </ng-template>
+</ion-modal>
