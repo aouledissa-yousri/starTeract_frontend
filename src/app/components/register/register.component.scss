@@ -15,7 +15,20 @@
     --background: linear-gradient(to top right, purple, #c12ef2)
 }
 
-
-.input{
-    
+.select-country{
+    background: white;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    outline: none;
 }
+
+.exit{
+    font-size: 200%;
+}
+
+cdk-virtual-scroll-viewport{
+    height: 100%;
+    width: 100%;
+}
+
+

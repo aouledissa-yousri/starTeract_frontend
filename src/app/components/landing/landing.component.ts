@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
 })
 export class LandingComponent implements OnInit {
 
-  image = "assets/starzly.png"
+  image = "assets/starTeract.png"
+  loading = true
   isModalOpen = false
   modal = {
     header: "",
@@ -19,15 +20,21 @@ export class LandingComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.stopLoading()
+  }
+
+  ionViewDidEnter() {
+    this.stopLoading()
+  }
+
+  ionViewDidLeave(){
+    this.removeBackground()
+  }
 
   openModal(event){
     this.isModalOpen = true
     this.generateModalContent(event)
-  }
-
-  closeModal(state: boolean){
-    this.isModalOpen = state
   }
 
   private generateModalContent(event){
@@ -60,9 +67,32 @@ export class LandingComponent implements OnInit {
   }
 
 
-  normalSignUp(state: boolean){
-    this.closeModal(state)
-    this.router.navigate(["signUp"])
+  normalSignUp(){
+    this.closeModal()
+    let self = this
+    setTimeout(function(){
+      self.router.navigate(["signUp"])
+    }, 1)
+  }
+
+  private stopLoading(){
+    let self = this
+    setTimeout(function(){
+      self.loading = false
+      self.setBackground()
+    }, 2000)
+  }
+
+  private setBackground(){
+    document.getElementsByTagName("body")[0].classList.add("background")
+  }
+
+  private removeBackground(){
+    document.getElementsByTagName("body")[0].classList.remove("background")
+  }
+
+  closeModal(){
+    this.isModalOpen = false
   }
 
 }

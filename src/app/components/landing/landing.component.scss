@@ -1,30 +1,40 @@
-.logo-starzly {
+
+.logo-starTeract {
     height: 70px;
     width: 200px;
 }
 
-.header, .actions{
-    margin: auto;
-    width: 50%;
+.header, .logo-starTeract{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%)
 }
 
+
+
 .header-text{
-    margin-left: -10%;
+    margin-top: 80px;
     text-align: center; 
-    width: 250px;
-    font-weight: "bold";
+    font-weight: bold;
     line-height: 1.6;
 }
 
 .actions{
-    width: 80%;
-    position: relative;
-    top: 500px;
+    position: absolute;
+    margin-left: 0;
+    top: 80%;
+    width: 100%;
+    padding-left: 23%;
 }
 
 .action{
+    margin-right: 11%;
     height: 50px;
-    width: 130px;
+    width: 30%;
+    --background: transparent;
+    font-weight: bold;
+    border: 3px solid rgb(248, 150, 248);
+    border-radius: 10px;
 }
 
 @keyframes fade{
@@ -41,10 +51,51 @@
 }
 
 .half{
-    height: 40%;
-    top: 60%;
+    height: 50%;
+    top: 50%;
     position: absolute;
-    border-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     border-top: 1px solid grey;
 }
+
+.home {
+    animation: fade 2s;
+}
+
+.exit{
+    background: grey;
+    margin-left: 5px;
+    margin-top: 5px;
+    border-radius: 50px;
+    padding: 5px;
+    color: white;
+    margin-left: 90%;
+}
+
+.header2{
+    font-weight: bold;
+    text-align: center;
+}
+
+.actions2{
+    margin: 10px;
+}
+
+.action2{
+    height: 50px;
+    margin-top: 10%;
+    --background: linear-gradient(to top right, purple, rgb(187, 7, 187))
+}
+
+.facebook{
+    --background: rgb(76, 76, 235);
+}
+
+.google{
+    --background: rgb(235, 235, 241);
+    --color: black;
+}
+
+
 

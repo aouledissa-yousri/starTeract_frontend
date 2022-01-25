@@ -1,0 +1,51 @@
+$center: translate(-50%, -50%);
+
+.loading, .loading2{
+    border: 5px solid transparent;
+    border-left: 5px solid rgb(197, 15, 197);
+    border-right: 5px solid rgb(197, 15, 197);
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    padding: 45px;
+    animation: spin 2s infinite linear;
+}
+
+.loading2 {
+    height: 200px;
+    width: 200px;
+    animation: spin 2s infinite linear reverse;
+}
+
+.center{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: $center;
+}
+
+.logo-starTeract{
+    height: 150px;
+    width: 150px;
+    animation: fade 2s infinite;
+}
+
+
+
+@keyframes spin{
+    0%{
+        transform: $center rotate(0deg);
+    }
+    100%{
+        transform: $center rotate(360deg)
+    }
+}
+
+@keyframes fade{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}

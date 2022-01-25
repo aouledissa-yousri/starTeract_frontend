@@ -1,23 +1,27 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule} from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { ScrollingModule } from "@angular/cdk/scrolling";
+
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingComponent } from './components/landing/landing.component';
-import { OptionsComponent } from './components/options/options.component';
 import { RegisterComponent } from './components/register/register.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { CountryFilterPipe } from './pipes/countryFilter/country-filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
-    OptionsComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoadingComponent,
+    CountryFilterPipe
   ],
   entryComponents: [],
   imports: [
@@ -25,7 +29,9 @@ import { RegisterComponent } from './components/register/register.component';
     IonicModule.forRoot(), 
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    FormsModule,
+    HttpClientModule,
+    ScrollingModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
