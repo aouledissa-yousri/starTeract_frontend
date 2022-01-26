@@ -17,7 +17,6 @@ export class RegisterComponent implements OnInit {
   countryListOpen = false
   countries: Country[] = []
   selectedCountry: Country = new Country(0,"","","","")
-  country = ""
 
   constructor(private build: FormBuilder, private router: Router, private api: ApiService) { }
 
@@ -44,7 +43,7 @@ export class RegisterComponent implements OnInit {
       this.selectedCountry.dial+this.form.value["phone"]
     )
     this.api.signUp(user).subscribe(data => {
-      console.log(data)
+      console.log(data.success)
     })
   }
 
@@ -84,6 +83,10 @@ export class RegisterComponent implements OnInit {
   selectCountry(id: number){
     this.selectedCountry = this.countries[id]
     this.closeCountryList() 
+  }
+
+  joinAsTalent(){
+    this.router.navigate(["joinAsTalent"])
   }
 
   

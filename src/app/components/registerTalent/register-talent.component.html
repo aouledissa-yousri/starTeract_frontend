@@ -1,0 +1,92 @@
+<div class = "container form-container">
+  <ion-icon name = "chevron-back-outline" class = "back" (click) = "back()"></ion-icon>
+  <h1 class = "label">Join as a talent</h1>
+
+  <form [formGroup] = "form" (ngSubmit) = "signUpAsTalent()">
+    <ion-item>
+      <ion-label position = "floating">Name</ion-label>
+      <ion-input type = "text" placeholder = "Enter your name" formControlName = "name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position = "floating">Email</ion-label>
+      <ion-input type = "text" placeholder = "ex: xyz@email.com"  formControlName = "email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position = "floating">Password</ion-label>
+      <ion-input type = "password" placeholder = "Must be atleast 8 characters long" formControlName = "password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <button (click) = "openCountryList()" class = "select-country" type = "button">{{selectedCountry.flag}} {{selectedCountry.dial}}</button>
+      <ion-item>
+        <ion-label position = "floating" >Phone number</ion-label>
+        <ion-input type = "number" formControlName = "phone" min="0"></ion-input>
+      </ion-item>
+    </ion-item><br><br>
+
+    <ion-item>
+      <ion-label position = "floating">Ruling social network</ion-label>
+      <ion-select placeholder = "Select the social network where you are the most active on" formControlName = "rulingSocialNetwork">
+        <ion-select-option value = "Facebook">Facebook</ion-select-option>
+        <ion-select-option value = "Instagram">Instagram</ion-select-option>
+        <ion-select-option value = "Twitter">Twitter</ion-select-option>
+        <ion-select-option value = "TikTok">TikTok</ion-select-option>
+        <ion-select-option value = "Snapchat">Snapchat</ion-select-option>
+        <ion-select-option value = "Youtube">Youtube</ion-select-option>
+        <ion-select-option value = "Twitch">Twitch</ion-select-option>
+        <ion-select-option value = "Other">Other</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position = "floating">Nickname</ion-label>
+      <ion-input type = "text" formControlName = "nickname"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-textarea placeholder = "Tell us more about yourself" formControlName = "description"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position = "floating">Classification</ion-label>
+      <ion-select placeholder = "Choose the categories that you fit in" formControlName = "categories" multiple = "true">
+        <ng-container *ngFor = "let category of categories">
+          <ion-select-option [value] = "category.name">{{category.name}}</ion-select-option>
+        </ng-container>
+      </ion-select>
+    </ion-item>
+
+    <ion-button expand = "block" class = "join" type = "submit">Join As Talent</ion-button>
+  </form>
+
+  <ion-modal [isOpen] = "countryListOpen">
+    <ng-template>
+      <ion-item >
+        <div (click) = "closeCountryList()" style = "display: inline">
+          <ion-icon class = "exit" name = "close"></ion-icon>
+        </div>
+        <ion-input placeholder="Enter country name" [(ngModel)] = "country"></ion-input>
+      </ion-item>
+
+      <ion-content>
+        <cdk-virtual-scroll-viewport itemSize="48.2" minBufferPx="100000" maxBufferPx="100000">
+          <ion-list>
+            <ion-item *cdkVirtualFor = "let country of countries | countryFilter: country; index as i" (click) = "selectCountry(country.id)" [id] = "i">
+              <ion-label>
+                {{country.flag}} {{country.name}} ({{country.dial}})
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </cdk-virtual-scroll-viewport>
+      </ion-content>
+
+    </ng-template>
+
+  </ion-modal>
+
+
+
+</div>

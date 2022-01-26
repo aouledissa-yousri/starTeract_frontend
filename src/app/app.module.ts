@@ -14,6 +14,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { CountryFilterPipe } from './pipes/countryFilter/country-filter.pipe';
+import { RegisterTalentComponent } from './components/registerTalent/register-talent.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CountryFilterPipe } from './pipes/countryFilter/country-filter.pipe';
     LandingComponent,
     RegisterComponent,
     LoadingComponent,
-    CountryFilterPipe
+    CountryFilterPipe,
+    RegisterTalentComponent
   ],
   entryComponents: [],
   imports: [

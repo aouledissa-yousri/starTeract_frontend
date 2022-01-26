@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http"
 import { Observable } from "rxjs";
 import { User } from 'src/app/models/User';
+import { Category } from 'src/app/models/Category';
+import { Talent } from 'src/app/models/Talent';
 
 const URL = "http://127.0.0.1:8000"
 
@@ -14,5 +16,13 @@ export class ApiService {
 
   signUp(user: User): Observable<any>{
     return this.http.post(URL+"/api/signUp/", user)
+  }
+
+  getCategories(): Observable<Category[]>{
+    return this.http.get<Category[]>(URL+"/api/categories/")
+  }
+
+  signUpAsTalent(talent: Talent): Observable<any>{
+    return this.http.post(URL+"/api/joinAsTalent/", talent)
   }
 }

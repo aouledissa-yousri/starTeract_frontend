@@ -23,13 +23,13 @@
     <ion-item >
       <button (click) = "openCountryList()" class = "select-country" type = "button">{{selectedCountry.flag}} {{selectedCountry.dial}}</button>
       <ion-item>
-        <ion-label position = "floating" min="0">Phone number</ion-label>
-        <ion-input type = "number" formControlName = "phone" ></ion-input>
+        <ion-label position = "floating">Phone number</ion-label>
+        <ion-input type = "number" formControlName = "phone" min="0"></ion-input>
       </ion-item>
     </ion-item><br><br>
 
     <ion-button expand = "block" class = "join" type = "submit" [disabled] = "form.invalid">Join As Normal User</ion-button>
-    <ion-button expand = "block" class = "join" type = "button">Join As Talent</ion-button>
+    <ion-button expand = "block" class = "join" type = "button" (click) = "joinAsTalent()">Join As Talent</ion-button>
   </form>
 
 
