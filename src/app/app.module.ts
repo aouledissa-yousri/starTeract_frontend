@@ -15,6 +15,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { CountryFilterPipe } from './pipes/countryFilter/country-filter.pipe';
 import { RegisterTalentComponent } from './components/registerTalent/register-talent.component';
+import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { RegisterTalentComponent } from './components/registerTalent/register-ta
     RegisterComponent,
     LoadingComponent,
     CountryFilterPipe,
-    RegisterTalentComponent
+    RegisterTalentComponent,
+    LoginComponent,
+    HomeComponent
   ],
   entryComponents: [],
   imports: [

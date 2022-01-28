@@ -24,3 +24,19 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.exit-dialogue{
+    color: white !important;
+    border-radius: 5px !important;
+    background: linear-gradient(to top right, purple, #c12ef2);
+    margin-right: 36% !important;
+    padding-left: 10% !important;
+    padding-right: 10% !important;
+}
+
+.content-dialogue{
+    text-align: center !important;
+    .alert-head{
+        text-align: center !important;
+    }
+}

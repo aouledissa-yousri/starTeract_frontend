@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { sha1 } from 'src/app/extra';
 import { Category } from 'src/app/models/Category';
 import { Country } from 'src/app/models/Country';
 import { Talent } from 'src/app/models/Talent';
@@ -20,7 +22,7 @@ export class RegisterTalentComponent implements OnInit {
   selectedCountry: Country = new Country(0,"","","","")
   categories: Category[] = []
 
-  constructor(private build: FormBuilder, private router: Router, private api: ApiService) { }
+  constructor(private build: FormBuilder, private router: Router, private api: ApiService, private alert: AlertController) { }
 
   ngOnInit() {
     this.fetchCountryData()
@@ -38,7 +40,7 @@ export class RegisterTalentComponent implements OnInit {
       nickname: ["", Validators.required],
       followers: [0, Validators.required],
       description: ["", Validators.required],
-      categories: [Validators.required]
+      categories: ["", Validators.required]
     })
   }
 
@@ -90,18 +92,19 @@ export class RegisterTalentComponent implements OnInit {
     let talent = new Talent(
       this.form.value["name"],
       this.form.value["email"],
-      this.form.value["password"],
+      sha1.hash(this.form.value["password"]),
       this.selectedCountry.name,
       this.selectedCountry.dial+this.form.value["phone"],
       this.form.value["rulingSocialNetwork"],
       this.form.value["nickname"],
       this.form.value["followers"],
       this.form.value["description"],
-      this.validateCategories(this.form.value["categories"])
+      this.validateCategories(this.form.value["categories"]),
     )
     
     this.api.signUpAsTalent(talent).subscribe(data => {
-      console.log(data)
+      if(data.success)
+        this.signUpSuccess()
     })
   }
 
@@ -117,4 +120,21 @@ export class RegisterTalentComponent implements OnInit {
     }
     return result
   }
+
+  async signUpSuccess(){
+    await this.alert.create({
+      header: "Sign up successful",
+      cssClass: "content-dialogue",
+      message: "Your account will be open soon after we contact you",
+      buttons: [
+        { 
+          cssClass: "exit-dialogue",
+          text: "OK"
+        }
+      ]
+    }).then(box => box.present())
+    this.form.reset({})
+  }
+
+  
 }

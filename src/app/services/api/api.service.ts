@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { User } from 'src/app/models/User';
 import { Category } from 'src/app/models/Category';
 import { Talent } from 'src/app/models/Talent';
+import { Credentials } from 'src/app/models/Credentials';
 
 const URL = "http://127.0.0.1:8000"
 
@@ -24,5 +25,13 @@ export class ApiService {
 
   signUpAsTalent(talent: Talent): Observable<any>{
     return this.http.post(URL+"/api/joinAsTalent/", talent)
+  }
+
+  login(credentials: Credentials): Observable<any>{
+    return this.http.post(URL+"/api/login/", credentials)
+  }
+
+  auth(token: any): Observable<any>{
+    return this.http.post(URL+"/api/auth/", token)
   }
 }

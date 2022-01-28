@@ -1,0 +1,18 @@
+<div class = "container form-container">
+  <ion-icon name = "chevron-back-outline" class = "back" (click) = "back()"></ion-icon>
+  <h1 class = "label">Login</h1>
+
+  <form [formGroup] = "form" (ngSubmit) = "login()">
+    <ion-item>
+      <ion-label position = "floating">Email or User name</ion-label>
+      <ion-input type = "text" placeholder = "Enter your email or username"  formControlName = "user"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position = "floating">Password</ion-label>
+      <ion-input type = "password" placeholder = "Must be atleast 8 characters long" formControlName = "password"></ion-input>
+    </ion-item>
+
+    <ion-button expand = "block" class = "join" type = "submit" [disabled] = "form.invalid">Login</ion-button>
+  </form>
+</div>

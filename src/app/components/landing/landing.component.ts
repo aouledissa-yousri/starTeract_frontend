@@ -66,12 +66,27 @@ export class LandingComponent implements OnInit {
     this.modal.button3 = "Sign up with Email"
   }
 
+  action(){
+    if(this.modal.button3 == "Sign up with Email")
+      this.normalSignUp()
+    else
+      this.login()
+  }
+
 
   normalSignUp(){
     this.closeModal()
     let self = this
     setTimeout(function(){
       self.router.navigate(["signUp"])
+    }, 1)
+  }
+
+  login(){
+    this.closeModal()
+    let self = this
+    setTimeout(function(){
+      self.router.navigate(["login"])
     }, 1)
   }
 

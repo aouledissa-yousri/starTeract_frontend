@@ -41,8 +41,13 @@
     </ion-item>
 
     <ion-item>
+      <ion-label position = "floating">Followers</ion-label>
+      <ion-input type = "number" formControlName = "followers" mine = "0"></ion-input>
+    </ion-item>
+
+    <ion-item>
       <ion-label position = "floating">Nickname</ion-label>
-      <ion-input type = "text" formControlName = "nickname"></ion-input>
+      <ion-input type = "text" formControlName = "nickname" mine = "0"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -59,7 +64,7 @@
       </ion-select>
     </ion-item>
 
-    <ion-button expand = "block" class = "join" type = "submit">Join As Talent</ion-button>
+    <ion-button expand = "block" class = "join" type = "submit" [disabled] = "form.invalid">Join As Talent</ion-button>
   </form>
 
   <ion-modal [isOpen] = "countryListOpen">
