@@ -39,11 +39,11 @@ export class LoginComponent implements OnInit {
       sha1.hash(this.form.value["password"])
     )
 
+
     this.api.login(credentials).subscribe(data => {
       switch(data.message){
         case "success":
-          localStorage.setItem("token", data.token)
-          this.router.navigate(["home"])
+          this.success(data)
           break
         case "password is wrong":
           this.wrongPassword()
@@ -119,5 +119,14 @@ export class LoginComponent implements OnInit {
     }).then(box => box.present())
     this.form.reset({})
   }
+
+  private success(data){
+    localStorage.setItem("token", data.token)
+    localStorage.setItem("id", data.id)
+    this.router.navigate(["main/home"])
+    this.form.reset({})
+  }
+
+  
 
 }

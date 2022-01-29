@@ -43,7 +43,8 @@ export class RegisterComponent implements OnInit {
       this.form.value["email"],
       sha1.hash(this.form.value["password"]),
       this.selectedCountry.name,
-      this.selectedCountry.dial+this.form.value["phone"]
+      this.selectedCountry.dial+this.form.value["phone"],
+      null
     )
 
 

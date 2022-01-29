@@ -1,0 +1,35 @@
+@keyframes fade{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+.container{
+    animation: fade 1s;
+    overflow: scroll;
+}
+
+.search{
+    position: fixed;
+    width: 105%;
+    margin-left: -5%;
+    background: white;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    z-index: 999;
+}
+
+.talent{
+    display: inline-block;
+}
+
+.img{
+    height: 50%;
+    width: 50%;
+}
+
+

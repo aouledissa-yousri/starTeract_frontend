@@ -12,8 +12,10 @@ export class Talent extends User{
         public nickname: string,
         public followers: number, 
         public description: string,
+        public image: string,
         public categories: Category[],
+        public rating: number
     ){
-        super(name,email,password,country,phone)
+        super(name,email,password,country,phone, image)
     }
 }

@@ -16,7 +16,7 @@ export class DesAuthGuard implements CanActivate {
         if(data.message == "invalid token")
           obs.next(true)
         else 
-          obs.next(this.router.navigate(["home"]))
+          obs.next(this.router.navigate(["main/home"]))
       })
     })
           

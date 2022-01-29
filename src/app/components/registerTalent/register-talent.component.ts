@@ -99,12 +99,16 @@ export class RegisterTalentComponent implements OnInit {
       this.form.value["nickname"],
       this.form.value["followers"],
       this.form.value["description"],
+      null,
       this.validateCategories(this.form.value["categories"]),
+      0
     )
     
     this.api.signUpAsTalent(talent).subscribe(data => {
       if(data.success)
         this.signUpSuccess()
+      else
+        this.signUpFailed()
     })
   }
 
@@ -135,6 +139,22 @@ export class RegisterTalentComponent implements OnInit {
     }).then(box => box.present())
     this.form.reset({})
   }
+
+  async signUpFailed(){
+    await this.alert.create({
+      header: "User already exists",
+      cssClass: "content-dialogue",
+      message: "The phone number, email or username you provided already belongs to another user",
+      buttons: [
+        { 
+          cssClass: "exit-dialogue",
+          text: "OK"
+        }
+      ]
+    }).then(box => box.present())
+    this.form.reset({})
+  }
+
 
   
 }

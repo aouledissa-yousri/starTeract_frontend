@@ -1,0 +1,16 @@
+<div class = "container">
+    <h3 style = "text-align: center">My Account</h3>        
+    <div class = "identity">
+        <ion-img [src] = "user.image" class = "img"></ion-img>
+        <h4 style = "text-align: center">{{user.name | titlecase}}</h4>
+    </div>
+
+   <div class = "list">
+    <ion-list>
+        <ion-item (click)= "logOut()">
+            <ion-label>Log out</ion-label>
+            <ion-icon name = "log-out" color = "primary"></ion-icon>
+        </ion-item>
+    </ion-list>
+   </div>
+</div>

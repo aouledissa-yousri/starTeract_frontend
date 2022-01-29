@@ -7,6 +7,9 @@ import { RegisterTalentComponent } from './components/registerTalent/register-ta
 import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './guards/auth/auth.guard';
 import { DesAuthGuard } from './guards/desAuth/des-auth.guard';
+import { MainComponent } from './components/main/main.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 const routes: Routes = [
   {path: "", redirectTo: "land", pathMatch: "full"},
@@ -14,7 +17,14 @@ const routes: Routes = [
   {path: "signUp", component: RegisterComponent, canActivate: [DesAuthGuard]},
   {path: "joinAsTalent", component: RegisterTalentComponent, canActivate: [DesAuthGuard]},
   {path: "login", component: LoginComponent, canActivate: [DesAuthGuard]},
-  {path: "home", component: HomeComponent, canActivate: [AuthGuard]}
+  {path: "main", component: MainComponent, canActivate: [AuthGuard], 
+    children: [
+      {path: "", redirectTo: "home", pathMatch: "full"},
+      {path: "home", component: HomeComponent},
+      {path: "settings", component: SettingsComponent},
+      {path: "notifications", component: NotificationsComponent}
+    ]
+  }
 ];
 @NgModule({
   imports: [

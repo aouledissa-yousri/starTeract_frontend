@@ -34,4 +34,12 @@ export class ApiService {
   auth(token: any): Observable<any>{
     return this.http.post(URL+"/api/auth/", token)
   }
+
+  getTalents(): Observable<any>{
+    return this.http.get<any>(URL+"/api/talents/")
+  }
+
+  getUserData(id: number): Observable<any>{
+    return this.http.post(URL+"/api/users/", {"id": id})
+  }
 }

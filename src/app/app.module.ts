@@ -4,6 +4,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { ReactiveFormsModule, FormsModule} from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { ScrollingModule } from "@angular/cdk/scrolling";
+import { SwiperModule } from "swiper/angular"
 
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -17,6 +18,9 @@ import { CountryFilterPipe } from './pipes/countryFilter/country-filter.pipe';
 import { RegisterTalentComponent } from './components/registerTalent/register-talent.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
+import { MainComponent } from './components/main/main.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,10 @@ import { HomeComponent } from './components/home/home.component';
     CountryFilterPipe,
     RegisterTalentComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    MainComponent,
+    SettingsComponent,
+    NotificationsComponent,
   ],
   entryComponents: [],
   imports: [
@@ -37,9 +44,10 @@ import { HomeComponent } from './components/home/home.component';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    ScrollingModule
+    ScrollingModule,
+    SwiperModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
