@@ -99,7 +99,7 @@ export class RegisterTalentComponent implements OnInit {
       this.form.value["nickname"],
       this.form.value["followers"],
       this.form.value["description"],
-      null,
+      "",
       this.validateCategories(this.form.value["categories"]),
       0
     )

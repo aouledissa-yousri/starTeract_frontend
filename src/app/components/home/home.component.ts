@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Category } from 'src/app/models/Category';
 import { Classification } from 'src/app/models/Classification';
 import { Container } from 'src/app/models/Container';
@@ -14,11 +15,12 @@ export class HomeComponent implements OnInit {
 
   containers: Container[] = []
   config = {
-    slidesPerView: 2.5
+    slidesPerView: 2.5,
+    speed: 800
   }
   
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private router: Router) { }
 
   ngOnInit() {
     this.fetchCategories()
@@ -64,6 +66,10 @@ export class HomeComponent implements OnInit {
           array[i].rating
         )
     
+  }
+
+  talentDetails(name: string){
+    this.router.navigate(["main/talent", name])
   }
 
 }

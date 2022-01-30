@@ -1,0 +1,114 @@
+<div class = "container" [ngClass] = "{'not-bright': isModalOpen}">
+  <ion-icon name = "chevron-back" style = "font-size: 30px" color= "primary" (click) = "back()"></ion-icon>
+  
+
+  <div class = "main">
+    <div class = "header">
+      <div style = "float: left">
+        <h5 class = "font-responsive">{{talentDetails.name}}</h5>
+        <p class = "font-responsive">{{talentDetails.country}}</p>
+        
+        <div class = "reviews">
+          <ion-icon name = "star" color = "warning"></ion-icon>&nbsp;
+          <span class = "font-responsive">{{talentDetails.rating}}</span><br>
+          <span class = "font-responsive">{{reviews.reviewNum}} Review(s)</span>
+        </div>
+      </div>
+      <ion-img [src] = "talentDetails.image" class = "img"></ion-img>
+    </div><br>
+
+    <div class = "categories">
+        <ng-container *ngFor = "let category of talentDetails.categories">
+          <span class = "font-responsive-category">{{category.name}}</span> &nbsp; &nbsp;
+        </ng-container>
+    </div><br>
+
+    <div class = "videos">
+      <h5 class = "font-responsive">Videos</h5>
+    </div>
+
+    <div class = "description font-responsive-category">
+      {{talentDetails.description}}
+    </div>
+
+
+  </div>
+
+
+
+  <ion-modal [isOpen] = "isModalOpen" class = "half">
+    <ng-template>
+      <div (click) = "closeModal()">
+        <ion-icon class = "exit" name = "close"></ion-icon>
+      </div>
+
+      <div style = "padding: 10px">
+        <h1>Choose service</h1>
+
+        <div id = "personal" [ngClass] = "{'option-selected': service.personal, option: !service.personal}" (click) = "select($event)">
+          <ion-icon name = "gift-sharp" class = "font-responsive"></ion-icon>&nbsp; &nbsp;
+          <b class = "font-responsive">Personal Video</b>
+          <ion-icon name = "checkmark-circle" class = "font-responsive checked" [hidden] = "!service.personal" color = "primary"></ion-icon>
+        </div>
+
+        <div id = "advertisement" [ngClass] = "{'option-selected': service.advertisement, option: !service.advertisement}" (click) = "select($event)">
+          <ion-icon name = "radio-sharp" class = "font-responsive"></ion-icon>&nbsp; &nbsp;
+          <b class = "font-responsive">Advertisement</b>
+          <ion-icon name = "checkmark-circle" class = "font-responsive checked" [hidden] = "!service.advertisement" color = "primary"></ion-icon>
+        </div>
+
+        <ion-button color = "primary" style = "width: 100%; margin-bottom: 10%" (click) = "openModal2()">Continue</ion-button>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen] = "isModal2Open">
+    <ng-template>
+      <div (click) = "closeModal2()">
+        <ion-icon name = "chevron-back" style = "font-size: 28px"></ion-icon>
+      </div>
+
+        <ion-img [src] = "talentDetails.image" class = "img2"></ion-img> &nbsp;
+        <b class = "font-responsive-category">New Request to {{talentDetails.name}}</b>
+      <form class = "container form">
+        
+        <ion-item>
+          <ion-label><b>What's the occasion</b></ion-label>
+          <ion-select>
+            <div *ngIf = "service.personal">
+              <ion-select-option>Birthday</ion-select-option>
+              <ion-select-option>Anniversary</ion-select-option>
+              <ion-select-option>Graduation</ion-select-option>
+              <ion-select-option>Question</ion-select-option>
+              <ion-select-option>Events</ion-select-option>
+              <ion-select-option>Advice</ion-select-option>
+              <ion-select-option>Other</ion-select-option>
+            </div>
+
+            <div *ngIf = "service.advertisement">
+              <ion-select-option>Marketing video</ion-select-option>
+              <ion-select-option>New business</ion-select-option>
+              <ion-select-option>Announcement</ion-select-option>
+              <ion-select-option>Endorsement</ion-select-option>
+            </div>
+          </ion-select>
+        </ion-item><br><br>
+        <ion-item>
+          <ion-label position = "floating">Description (be specific)</ion-label>
+          <ion-textarea style = "padding: 10px"></ion-textarea>
+        </ion-item>
+        <ion-button color = "primary" style = "width: 100%; margin-bottom: 10%">Submit</ion-button>
+      </form>
+    </ng-template>
+  </ion-modal>
+
+    
+
+</div>
+
+<div class = "button-container">
+  <ion-button class = "button" (click) = "openModal()">Book Now</ion-button>
+    <ion-button color = "primary-contrast" class = "button2">
+      <ion-icon name = "alert-circle" color = "dark"></ion-icon>
+    </ion-button>
+</div>

@@ -10,6 +10,8 @@ import { DesAuthGuard } from './guards/desAuth/des-auth.guard';
 import { MainComponent } from './components/main/main.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { TalentComponent } from './components/talent/talent.component';
+
 
 const routes: Routes = [
   {path: "", redirectTo: "land", pathMatch: "full"},
@@ -22,7 +24,8 @@ const routes: Routes = [
       {path: "", redirectTo: "home", pathMatch: "full"},
       {path: "home", component: HomeComponent},
       {path: "settings", component: SettingsComponent},
-      {path: "notifications", component: NotificationsComponent}
+      {path: "notifications", component: NotificationsComponent},
+      {path: "talent/:name", component: TalentComponent}
     ]
   }
 ];

@@ -42,4 +42,8 @@ export class ApiService {
   getUserData(id: number): Observable<any>{
     return this.http.post(URL+"/api/users/", {"id": id})
   }
+
+  getTalentData(name: string): Observable<any>{
+    return this.http.post(URL+"/api/talent/", {"name": name})
+  }
 }
