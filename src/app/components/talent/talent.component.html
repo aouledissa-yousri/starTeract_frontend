@@ -57,7 +57,7 @@
           <ion-icon name = "checkmark-circle" class = "font-responsive checked" [hidden] = "!service.advertisement" color = "primary"></ion-icon>
         </div>
 
-        <ion-button color = "primary" style = "width: 100%; margin-bottom: 10%" (click) = "openModal2()">Continue</ion-button>
+        <ion-button color = "primary" style = "width: 100%; margin-bottom: 10%" (click) = "openModal2()" type = "button">Continue</ion-button>
       </div>
     </ng-template>
   </ion-modal>
@@ -70,11 +70,11 @@
 
         <ion-img [src] = "talentDetails.image" class = "img2"></ion-img> &nbsp;
         <b class = "font-responsive-category">New Request to {{talentDetails.name}}</b>
-      <form class = "container form">
+      <form class = "container form" [formGroup] = "form" (ngSubmit) = "submit()">
         
         <ion-item>
           <ion-label><b>What's the occasion</b></ion-label>
-          <ion-select>
+          <ion-select formControlName = "occasion">
             <div *ngIf = "service.personal">
               <ion-select-option>Birthday</ion-select-option>
               <ion-select-option>Anniversary</ion-select-option>
@@ -95,9 +95,9 @@
         </ion-item><br><br>
         <ion-item>
           <ion-label position = "floating">Description (be specific)</ion-label>
-          <ion-textarea style = "padding: 10px"></ion-textarea>
-        </ion-item>
-        <ion-button color = "primary" style = "width: 100%; margin-bottom: 10%">Submit</ion-button>
+          <ion-textarea style = "padding: 10px" formControlName = "description"></ion-textarea>
+        </ion-item><br><br>
+        <ion-button color = "primary" style = "width: 100%; margin-bottom: 10%" [disabled] = "form.invalid" type = "submit">Submit</ion-button>
       </form>
     </ng-template>
   </ion-modal>
@@ -107,8 +107,8 @@
 </div>
 
 <div class = "button-container">
-  <ion-button class = "button" (click) = "openModal()">Book Now</ion-button>
-    <ion-button color = "primary-contrast" class = "button2">
+  <ion-button class = "button" (click) = "openModal()" type = "button">Book Now</ion-button>
+    <ion-button color = "primary-contrast" class = "button2" type = "button">
       <ion-icon name = "alert-circle" color = "dark"></ion-icon>
     </ion-button>
 </div>

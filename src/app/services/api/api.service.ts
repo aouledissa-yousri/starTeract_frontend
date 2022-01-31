@@ -5,6 +5,8 @@ import { User } from 'src/app/models/User';
 import { Category } from 'src/app/models/Category';
 import { Talent } from 'src/app/models/Talent';
 import { Credentials } from 'src/app/models/Credentials';
+import { Service } from 'src/app/models/Service';
+import { Notification_ } from 'src/app/models/Notification';
 
 const URL = "http://127.0.0.1:8000"
 
@@ -45,5 +47,9 @@ export class ApiService {
 
   getTalentData(name: string): Observable<any>{
     return this.http.post(URL+"/api/talent/", {"name": name})
+  }
+
+  requestService(service: Service, notification: Notification_): Observable<any>{
+    return this.http.post(URL+"/api/requestService/", {"service": service, "notification": notification})
   }
 }

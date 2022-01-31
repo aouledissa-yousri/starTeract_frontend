@@ -123,6 +123,7 @@ export class LoginComponent implements OnInit {
   private success(data){
     localStorage.setItem("token", data.token)
     localStorage.setItem("id", data.id)
+    localStorage.setItem("name", data.name)
     this.router.navigate(["main/home"])
     this.form.reset({})
   }

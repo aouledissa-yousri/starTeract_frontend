@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { Notification_ } from 'src/app/models/Notification';
 import { Reviews } from 'src/app/models/Review';
+import { Service } from 'src/app/models/Service';
 import { Talent } from 'src/app/models/Talent';
 import { ApiService } from 'src/app/services/api/api.service';
 
@@ -15,6 +19,7 @@ export class TalentComponent implements OnInit {
   reviews: Reviews = new Reviews(0,[])
   isModalOpen = false
   isModal2Open = false
+  form: FormGroup = new FormGroup({})
 
   config = {
     slidesPerView: 2.5,
@@ -26,10 +31,17 @@ export class TalentComponent implements OnInit {
     advertisement: false
   }
 
-  constructor(private api: ApiService, private active: ActivatedRoute, private router: Router) { }
+  constructor(
+    private api: ApiService, 
+    private active: ActivatedRoute, 
+    private router: Router, 
+    private build: FormBuilder,
+    private alert: AlertController
+  ) { }
 
   ngOnInit() {
     this.getTalentDetails()
+    this.initForm()
   }
 
   private getTalentDetails(){
@@ -49,7 +61,7 @@ export class TalentComponent implements OnInit {
         data.rating
       )
       this.reviews = data.reviews
-      console.log(this.reviews)
+      localStorage.setItem("talent_id", data.id)
     })
   }
 
@@ -83,5 +95,70 @@ export class TalentComponent implements OnInit {
   closeModal2(){
     this.isModal2Open = false
   }
+
+  private initForm(){
+    this.form = this.build.group({
+      occasion: ["", Validators.required],
+      description: ["", [Validators.required, Validators.minLength(10)]]
+    })
+  }
+
+  submit(){
+    let type = ""
+    if(this.service.personal)
+      type = "Personal Video"
+    else
+      type = "Advertisement"
+    this.api.requestService(
+      new Service(
+        this.form.value["description"],
+        this.form.value["occasion"],
+        type,
+        parseInt(localStorage.getItem("id")),
+        parseInt(localStorage.getItem("talent_id"))
+      ),
+      new Notification_(
+        localStorage.getItem("name") + " requested a service"
+        ,false,
+        parseInt(localStorage.getItem("talent_id"))
+      )
+    ).subscribe(data => {
+      if(data.result)
+        this.success()
+      else
+        this.failure()
+    })
+  }
+
+  async success(){
+    await this.alert.create({
+      header: "Service request was submitted",
+      cssClass: "content-dialogue",
+      message: "We will notify you as soos as "+ this.talentDetails.name + " responds to your request",
+      buttons: [
+        { 
+          cssClass: "exit-dialogue",
+          text: "OK"
+        }
+      ]
+    }).then(box => box.present())
+    this.form.reset({})
+  }
+
+  async failure(){
+    await this.alert.create({
+      header: "Service request was not submitted",
+      cssClass: "content-dialogue",
+      message: "An error occured please try again later",
+      buttons: [
+        { 
+          cssClass: "exit-dialogue",
+          text: "OK"
+        }
+      ]
+    }).then(box => box.present())
+    this.form.reset({})
+  }
+
 
 }
