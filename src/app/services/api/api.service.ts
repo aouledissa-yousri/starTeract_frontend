@@ -52,4 +52,12 @@ export class ApiService {
   requestService(service: Service, notification: Notification_): Observable<any>{
     return this.http.post(URL+"/api/requestService/", {"service": service, "notification": notification})
   }
+
+  getNotifications(id :number): Observable<any>{
+    return this.http.get<Notification_[]>(URL+"/api/notifications/"+id)
+  }
+
+  checkNotifications(id: number){
+    return this.http.get(URL+"/api/checkNotifications/"+id)
+  }
 }

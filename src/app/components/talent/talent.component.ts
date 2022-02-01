@@ -118,9 +118,12 @@ export class TalentComponent implements OnInit {
         parseInt(localStorage.getItem("talent_id"))
       ),
       new Notification_(
+        0,
         localStorage.getItem("name") + " requested a service"
         ,false,
-        parseInt(localStorage.getItem("talent_id"))
+        parseInt(localStorage.getItem("talent_id")),
+        parseInt(localStorage.getItem("id")),
+        ""
       )
     ).subscribe(data => {
       if(data.result)

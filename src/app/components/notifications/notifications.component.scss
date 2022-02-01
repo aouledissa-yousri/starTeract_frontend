@@ -1,1 +1,22 @@
-@import url("../home/home.component.scss")
+@import url("../home/home.component.scss");
+
+
+.header{
+    border-bottom: 2px solid rgb(224, 45, 224)
+}
+
+ion-item{
+    padding: 10px;
+}
+
+.img{
+    height: 40px;
+    width: 40px;
+    overflow: hidden;
+    border: 1px solid rgb(177, 7, 177);
+    border-radius: 50% !important;
+}
+
+.container{
+    overflow: scroll
+}

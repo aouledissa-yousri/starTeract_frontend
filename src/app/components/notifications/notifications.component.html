@@ -1,5 +1,13 @@
 <div class = "container">
-  <p>
-    notifications works!
-  </p>  
+  <div class = "header">
+    <h1>Notifications</h1>
+  </div>
+  <ion-list>
+    <ng-container *ngFor = "let notification of notifications">
+      <ion-item>
+        <ion-img [src] = "notification.image" class = "img"></ion-img>&nbsp;
+        {{notification.description}}
+      </ion-item>
+    </ng-container>
+  </ion-list> 
 </div>

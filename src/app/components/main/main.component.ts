@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api/api.service';
 
 @Component({
   selector: 'app-main',
@@ -7,8 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  unchecked = 0
 
-  ngOnInit() {}
+  constructor(private api: ApiService) { }
+
+  ngOnInit() {
+    this.getUnchecked()
+  }
+
+  getUnchecked(){
+    this.api.getNotifications(parseInt(localStorage.getItem("id"))).subscribe(data => {
+      this.unchecked = data.unread
+    })
+  }
+
+  checkNotifications(){
+    this.unchecked = 0
+  }
+
 
 }

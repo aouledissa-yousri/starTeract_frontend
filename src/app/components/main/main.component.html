@@ -11,8 +11,10 @@
       <ion-label>Account settings</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="notifications">
-      <ion-icon name="notifications"></ion-icon>
+    <ion-tab-button tab="notifications" (click) = "checkNotifications()">
+      <ion-icon name="notifications">
+      </ion-icon>
+      <ion-badge color = "danger" *ngIf = "unchecked > 0">{{unchecked}}</ion-badge>
       <ion-label>notifications</ion-label>
     </ion-tab-button>
 
