@@ -111,6 +111,7 @@ export class TalentComponent implements OnInit {
       type = "Advertisement"
     this.api.requestService(
       new Service(
+        0,
         this.form.value["description"],
         this.form.value["occasion"],
         type,

@@ -7,6 +7,7 @@ import { Talent } from 'src/app/models/Talent';
 import { Credentials } from 'src/app/models/Credentials';
 import { Service } from 'src/app/models/Service';
 import { Notification_ } from 'src/app/models/Notification';
+import { Task } from 'src/app/models/Task';
 
 const URL = "http://127.0.0.1:8000"
 
@@ -59,5 +60,13 @@ export class ApiService {
 
   checkNotifications(id: number){
     return this.http.get(URL+"/api/checkNotifications/"+id)
+  }
+
+  getServices(id: number): Observable<Task[]>{
+    return this.http.get<Task[]>(URL+"/api/getServices/"+id)
+  }
+
+  refuseService(notification: Notification_, id: number): Observable<any>{
+    return this.http.post(URL+"/api/refuseService/"+id+"/", {"notification": notification})
   }
 }
