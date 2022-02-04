@@ -9,11 +9,18 @@ import { ApiService } from 'src/app/services/api/api.service';
 export class MainComponent implements OnInit {
 
   unchecked = 0
+  isTalent = false
 
   constructor(private api: ApiService) { }
 
   ngOnInit() {
     this.getUnchecked()
+    this.isTalent = (localStorage.getItem("isTalent") == "true")
+  }
+
+  ionViewWillEnter(){
+    this.getUnchecked()
+    this.isTalent = (localStorage.getItem("isTalent") == "true")
   }
 
   getUnchecked(){

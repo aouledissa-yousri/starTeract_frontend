@@ -1,29 +1,14 @@
 @import url("../notifications/notifications.component.scss");
+@import url("../tasks/tasks.component.scss");
 
 .task-desc{
     width: 300px; 
     overflow: hidden !important;
     white-space: nowrap;
     text-overflow: ellipsis;
-    padding-left: 60px;
+    margin-left: 40px;
 }
 
-.list{
-    margin-top: 70px;
-}
-
-.btn{
-    width: 40%;
-    height: 50px;
-}
-
-.btn-container{
+.content{
     width: 100%;
-    position: absolute; 
-    bottom: 10%;
-    left: 8%;
-}
-
-.form{
-    margin-top: 30%;
 }

@@ -25,6 +25,10 @@ export class SettingsComponent implements OnInit {
     this.getUserData()
   }
 
+  ionViewWillEnter(){
+    this.getUserData()
+  }
+
   getUserData(){
     this.api.getUserData(parseInt(localStorage.getItem("id"))).subscribe(data => {
       this.user= data

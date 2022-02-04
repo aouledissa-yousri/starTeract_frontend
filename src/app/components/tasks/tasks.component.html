@@ -31,11 +31,35 @@
       <span><b>Occasion: </b>{{taskDetails.service.occasion}}</span><br><br>
       <span><b>Description: </b><br>{{taskDetails.service.description}}</span><br>
       <div class = "btn-container">
-        <ion-button color = "primary" class = "btn">Accept</ion-button>
+        <ion-button color = "primary" class = "btn" (click) = "accept()">Accept</ion-button>
         <ion-button color = "medium" class = "btn" (click) = "refuse()">Refuse</ion-button>
       </div>
      </div>
 
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen] = "isModal2Open">
+    <ng-template>
+      <div (click) = "closeModal2()">
+        <ion-icon name = "chevron-back" style = "font-size: 28px"></ion-icon>
+      </div>
+
+      <form class = "form container" [formGroup] = "form" (ngSubmit) = "submit()"> 
+        <ion-item>
+          <ion-label>Free service</ion-label>
+          <ion-checkbox color = "primary" formControlName = "free"></ion-checkbox>
+        </ion-item>
+
+        <ion-item [hidden] = "form.value['free']"> 
+          <ion-input placeholder = "Enter credit card number"  formControlName = "card"></ion-input>
+        </ion-item>
+
+        <ion-item [hidden] = "form.value['free']"> 
+          <ion-input placeholder = "Enter cost in dollars($)" formControlName = "cost" type= "number"></ion-input>
+        </ion-item>
+        <ion-button type = "submit" [disabled] = "!valid()" expand = "full">Confirm</ion-button>
+      </form>
     </ng-template>
   </ion-modal>
 </div>

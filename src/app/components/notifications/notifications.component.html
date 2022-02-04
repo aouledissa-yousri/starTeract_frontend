@@ -5,8 +5,10 @@
   <ion-list class = "list">
     <ng-container *ngFor = "let notification of notifications">
       <ion-item>
-        <ion-img [src] = "notification.image" class = "img"></ion-img>&nbsp;
-        {{notification.description}}
+        <img [src] = "notification.image" class = "img">
+        <p class = "text">
+          {{notification.description}}
+        </p>
       </ion-item>
     </ng-container>
   </ion-list> 

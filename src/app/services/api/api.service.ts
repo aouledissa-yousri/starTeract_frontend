@@ -8,6 +8,7 @@ import { Credentials } from 'src/app/models/Credentials';
 import { Service } from 'src/app/models/Service';
 import { Notification_ } from 'src/app/models/Notification';
 import { Task } from 'src/app/models/Task';
+import { Activity } from 'src/app/models/Activity';
 
 const URL = "http://127.0.0.1:8000"
 
@@ -68,5 +69,21 @@ export class ApiService {
 
   refuseService(notification: Notification_, id: number): Observable<any>{
     return this.http.post(URL+"/api/refuseService/"+id+"/", {"notification": notification})
+  }
+
+  sendNotification(notification: Notification_, id: number){
+    return this.http.post(URL+"/api/sendNotification/", {"notification": notification, "serviceId": id})
+  }
+
+  sendActivity(activity: Activity, notification: Notification_, id: number){
+    return this.http.post(URL+"/api/saveActivity/", {"notification": notification, "activity": activity, "serviceId": id})
+  }
+
+  getActivities(id: number): Observable<Activity[]>{
+    return this.http.get<Activity[]>(URL+"/api/getActivities/"+id)
+  }
+
+  deleteActivity(id: number): Observable<any>{
+    return this.http.post(URL+"/api/deleteActivity/",{"id": id})
   }
 }

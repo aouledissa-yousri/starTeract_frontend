@@ -12,6 +12,7 @@ import { NotificationsComponent } from './components/notifications/notifications
 import { SettingsComponent } from './components/settings/settings.component';
 import { TalentComponent } from './components/talent/talent.component';
 import { TasksComponent } from './components/tasks/tasks.component';
+import { ActivitiesComponent } from './components/activites/activites.component';
 
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
       {path: "settings", component: SettingsComponent},
       {path: "notifications", component: NotificationsComponent},
       {path: "talent/:name", component: TalentComponent},
-      {path: "tasks", component: TasksComponent}
+      {path: "tasks", component: TasksComponent},
+      {path: "activities", component: ActivitiesComponent}
     ]
   }
 ];

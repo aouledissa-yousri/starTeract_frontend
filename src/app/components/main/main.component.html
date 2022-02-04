@@ -19,9 +19,14 @@
     </ion-tab-button>
 
 
-    <ion-tab-button tab="tasks">
-      <ion-icon name="navigate-sharp"></ion-icon>
+    <ion-tab-button tab="tasks" *ngIf = "isTalent">
+      <ion-icon name="globe-sharp"></ion-icon>
       <ion-label>Tasks</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="activities">
+      <ion-icon name="navigate-sharp"></ion-icon>
+      <ion-label>Activities</ion-label>
     </ion-tab-button>
 
   </ion-tab-bar>

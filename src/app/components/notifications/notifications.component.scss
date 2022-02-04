@@ -13,11 +13,10 @@ ion-item{
 }
 
 .img{
-    height: 40px;
-    width: 40px;
-    overflow: hidden;
+    height: 50px;
+    width: 50px;
     border: 1px solid rgb(177, 7, 177);
-    border-radius: 50% !important;
+    border-radius: 50%;
 }
 
 .container{
@@ -26,4 +25,9 @@ ion-item{
 
 .list{
     margin-top: 13%;
+}
+
+.text{
+    margin-top: 50px;
+    margin-left: 20px;
 }

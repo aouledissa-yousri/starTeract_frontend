@@ -18,6 +18,11 @@ export class NotificationsComponent implements OnInit {
     this.checkNotifications()
   }
 
+  ionViewWillEnter(){
+    this.getNotifications()
+    this.checkNotifications()
+  }
+
   getNotifications(){
     this.api.getNotifications(parseInt(localStorage.getItem("id"))).subscribe(data => {
       this.notifications = data.notifications

@@ -23,6 +23,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { TalentComponent } from './components/talent/talent.component';
 import { TasksComponent } from './components/tasks/tasks.component';
+import { ActivitiesComponent } from './components/activites/activites.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { TasksComponent } from './components/tasks/tasks.component';
     SettingsComponent,
     NotificationsComponent,
     TalentComponent,
-    TasksComponent
+    TasksComponent,
+    ActivitiesComponent
   ],
   entryComponents: [],
   imports: [

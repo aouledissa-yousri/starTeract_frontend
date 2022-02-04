@@ -124,6 +124,7 @@ export class LoginComponent implements OnInit {
     localStorage.setItem("token", data.token)
     localStorage.setItem("id", data.id)
     localStorage.setItem("name", data.name)
+    localStorage.setItem("isTalent", data.isTalent)
     this.router.navigate(["main/home"])
     this.form.reset({})
   }

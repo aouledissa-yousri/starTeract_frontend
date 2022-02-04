@@ -1,0 +1,43 @@
+<div class = "container">
+  <div class = "header">
+    <h1>Activities</h1>
+  </div>
+
+  <ion-list class = "list">
+    <ion-item *ngFor = "let activity of activities; index as i" [id] = "i" (click) = "openModal($event)">
+      <div class = "content">
+        <img [src] = "activity.image" class = "img"> &nbsp;
+        <b>{{activity.name}}</b>
+        <p class = "task-desc">
+          {{activity.task}}
+        </p>
+        <ion-text color = "primary">
+          <h4>More</h4>
+        </ion-text>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <ion-modal [isOpen] = "isModalOpen">
+    <ng-template>
+      <div class = "container">
+        <div (click) = "closeModal()">
+          <ion-icon name = "chevron-back" style = "font-size: 28px"></ion-icon>
+        </div>
+      </div>
+
+
+      <div class = "container">
+        <h1>Details</h1>
+        <img [src] = "activityDetails.image" class = "img">
+        <h4>from {{activityDetails.name}}</h4>
+        <p>{{activityDetails.task}}</p>
+        <div class = "btn-container">
+          <ion-button color = "primary" class = "btn" (click) = "accept()">Proceed</ion-button>
+          <ion-button color = "medium" class = "btn" (click) = "cancel()">Cancel</ion-button>
+        </div>
+      </div>
+
+    </ng-template>
+  </ion-modal>
+</div>
