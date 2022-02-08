@@ -40,4 +40,36 @@
 
     </ng-template>
   </ion-modal>
+
+  <ion-modal [isOpen] = "isModal2Open">
+    <ng-template>
+      <div class = "container" >
+        <div (click) = "closeModal2()">
+          <ion-icon name = "chevron-back" style = "font-size: 28px"></ion-icon>
+        </div>
+
+        <div class = "upload" style = "width: 300px">
+          <h1 style = "text-align: center">Upload a video</h1>
+          <p style = "text-align: center; color: rgb(202, 200, 200)">
+            Click on the button to upload a video
+          </p>
+
+        <form [formGroup] = "form" (ngSubmit) = "uploadVideo()">
+          
+          <ion-item>
+            <ion-input placeholder = "Enter video title" formControlName = "title"></ion-input>
+          </ion-item>
+          <ion-button (click) = "file.click()" class = "upload-btn">
+            <span>Choose video to upload</span>
+            <input #file type = "file" type = "file" style = "display: none" accept = "video/mp4, video/x-m4v, video/*" (change) = "upload($event)" formControlName = "video">
+          </ion-button>
+          <p style = "text-align: center;" *ngIf = "selectedVideo !== null">{{selectedVideo.name}}</p>
+          <ion-button class = "upload-btn" [disabled] = "form.invalid" type = "submit">
+            Upload video
+          </ion-button>
+        </form>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
 </div>

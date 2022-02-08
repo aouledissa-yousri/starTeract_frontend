@@ -7,6 +7,14 @@
     float: right;
 }
 
+.user-img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50% !important;
+    overflow: hidden;
+    border: 1px solid rgb(177, 7, 177);
+}
+
 @keyframes fade{
     from{
         opacity: 0;
@@ -25,9 +33,11 @@
 }
 
 .container{
-    height: 100%;
-    overflow: hidden;
+    overflow: auto;
     animation: fade 1s;
+    height: 100%;
+    padding-bottom: 100px;
+    width: fit-content
 }
 
 
@@ -74,19 +84,25 @@
 }
 
 .videos{
-    position: absolute;
+    position: static;
     top: 40vh;
-    transform: translateY(-30%)
+    transform: translateY(-30%);
 }
 
 .categories{
-    position: absolute;
+    position: static;
     top: 35vh;
+    margin-left: 5%;
 }
 
 .description{
-    position: absolute;
+    position: static;
     top: 45vh
+}
+
+.reviews{
+    position: static;
+    top: 50vh
 }
 
 .option, .option-selected{
@@ -120,6 +136,33 @@
 .form{
     margin-top: 25%;
     height: 100%;
+}
+
+.make-review{
+    position: absolute;
+    right: 7%;
+}
+
+.stars{
+    width: 100%;
+    text-align: center
+}
+
+.rating-dialogue{
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    padding: 10px;
+}
+
+.comment{
+    background: rgb(228, 224, 224);
+    padding: 10px;
+    width: 92vw;
+    border-radius: 10px;
+    margin-bottom: 3%;
 }
 
 

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Notification_ } from 'src/app/models/Notification';
-import { Reviews } from 'src/app/models/Review';
+import { Review, Reviews } from 'src/app/models/Review';
 import { Service } from 'src/app/models/Service';
 import { Talent } from 'src/app/models/Talent';
 import { ApiService } from 'src/app/services/api/api.service';
@@ -19,7 +19,17 @@ export class TalentComponent implements OnInit {
   reviews: Reviews = new Reviews(0,[])
   isModalOpen = false
   isModal2Open = false
+  isModal3Open = false
   form: FormGroup = new FormGroup({})
+  ratingForm: FormGroup = new FormGroup({})
+  canRate = false
+  stars = [
+    "star-outline",
+    "star-outline",
+    "star-outline",
+    "star-outline",
+    "star-outline"
+  ]
 
   config = {
     slidesPerView: 2.5,
@@ -61,8 +71,21 @@ export class TalentComponent implements OnInit {
         data.rating
       )
       this.reviews = data.reviews
+      console.log(this.reviews.content[0].userImage)
+      this.seeCanRate()
       localStorage.setItem("talent_id", data.id)
     })
+  }
+
+  private seeCanRate(){
+    for(let i=0; i<this.reviews.content.length; i++){
+      if(this.reviews.content[i].user == parseInt(localStorage.getItem("id"))){
+        this.canRate = false
+        return
+      }
+    }
+    this.canRate = true
+    return
   }
 
   back(){
@@ -96,10 +119,23 @@ export class TalentComponent implements OnInit {
     this.isModal2Open = false
   }
 
+  openModal3(){
+    this.isModal3Open = true
+  }
+
+  closeModal3(){
+    this.isModal3Open = false
+  }
+
   private initForm(){
     this.form = this.build.group({
       occasion: ["", Validators.required],
       description: ["", [Validators.required, Validators.minLength(10)]]
+    })
+
+    this.ratingForm = this.build.group({
+      rating: [null, Validators.required],
+      comment: ["", Validators.required]
     })
   }
 
@@ -153,7 +189,7 @@ export class TalentComponent implements OnInit {
     await this.alert.create({
       header: "Service request was not submitted",
       cssClass: "content-dialogue",
-      message: "An error occured please try again later",
+      message: "An error occurred please try again later",
       buttons: [
         { 
           cssClass: "exit-dialogue",
@@ -162,6 +198,32 @@ export class TalentComponent implements OnInit {
       ]
     }).then(box => box.present())
     this.form.reset({})
+  }
+
+  setRating(event){
+    this.ratingForm.controls.rating.setValue(parseInt(event.currentTarget.id))
+    this.fill(this.ratingForm.value["rating"])
+  }
+
+  fill(rating: number){
+    for(let i=0; i<rating; i++)
+      this.stars[i] = "star"
+    for(let i=rating; i<5; i++)
+      this.stars[i] = "star-outline"
+
+  }
+
+  submitReview(){
+    this.api.postReview(
+      new Review(
+        this.ratingForm.value["comment"],
+        this.ratingForm.value["rating"],
+        parseInt(localStorage.getItem("id")),
+        parseInt(localStorage.getItem("talent_id"))
+      )
+    ).subscribe(data => {
+      this.getTalentDetails()
+    })
   }
 
 

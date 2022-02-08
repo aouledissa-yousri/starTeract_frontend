@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from 'src/app/services/api/api.service';
+import { InAppBrowser } from "@awesome-cordova-plugins/in-app-browser/ngx"
 
 @Component({
   selector: 'app-landing',
@@ -18,7 +20,7 @@ export class LandingComponent implements OnInit {
     button3: ""
   }
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private api: ApiService, private browser: InAppBrowser) { }
 
   ngOnInit() {
     this.stopLoading()
@@ -109,6 +111,14 @@ export class LandingComponent implements OnInit {
   closeModal(){
     this.isModalOpen = false
   }
+
+  googleAuth(){
+    const browser = this.browser.create("http://127.0.0.1:8000/accounts/google/login")
+    browser.on("exit").subscribe(event => {
+      browser.close()
+    })
+  }
+
 
   
 

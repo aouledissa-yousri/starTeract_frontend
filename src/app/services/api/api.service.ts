@@ -9,6 +9,8 @@ import { Service } from 'src/app/models/Service';
 import { Notification_ } from 'src/app/models/Notification';
 import { Task } from 'src/app/models/Task';
 import { Activity } from 'src/app/models/Activity';
+import { Video } from 'src/app/models/Video';
+import { Review } from 'src/app/models/Review';
 
 const URL = "http://127.0.0.1:8000"
 
@@ -39,8 +41,8 @@ export class ApiService {
     return this.http.post(URL+"/api/auth/", token)
   }
 
-  getTalents(): Observable<any>{
-    return this.http.get<any>(URL+"/api/talents/")
+  getTalents(id: number): Observable<any>{
+    return this.http.post<any>(URL+"/api/talents/", {"id": id})
   }
 
   getUserData(id: number): Observable<any>{
@@ -79,6 +81,11 @@ export class ApiService {
     return this.http.post(URL+"/api/saveActivity/", {"notification": notification, "activity": activity, "serviceId": id})
   }
 
+  sendActivity2(activity: Activity, id: number){
+    return this.http.post(URL+"/api/saveActivity2/", { "activity": activity, "serviceId": id})
+  }
+
+
   getActivities(id: number): Observable<Activity[]>{
     return this.http.get<Activity[]>(URL+"/api/getActivities/"+id)
   }
@@ -86,4 +93,17 @@ export class ApiService {
   deleteActivity(id: number): Observable<any>{
     return this.http.post(URL+"/api/deleteActivity/",{"id": id})
   }
+
+  addVideo(video: FormData){
+    return this.http.post(URL+"/api/addVideo/", video)
+  }
+
+  uploadImage(image: FormData, id: number): Observable<any>{
+    return this.http.post(URL+"/api/uploadImage/"+id+"/", image)
+  }
+
+  postReview(review: Review){
+    return this.http.post(URL+"/api/addReview/", review)
+  }
+
 }

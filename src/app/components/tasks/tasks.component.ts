@@ -118,14 +118,29 @@ export class TasksComponent implements OnInit {
         ),
         this.taskDetails.service.id
       ).subscribe()
-    }else{
-      this.api.sendActivity(
+    
+      this.api.sendActivity2(
         new Activity(
           0,
           this.taskDetails.service.user,
           this.taskDetails.service.talent,
-          "tou need to pay " + this.form.value["cost"] + "$ for your " + this.taskDetails.service.occasion + " video my credit card number is " + this.form.value["card"],
-          ""
+          "you need to make a(n) "+ this.taskDetails.service.occasion + " video for " + this.taskDetails.user.name,
+          "",
+          "video",
+        ),
+        this.taskDetails.service.id
+      ).subscribe()
+
+      
+    }else{
+      this.api.sendActivity(
+        new Activity(
+          0,
+          this.taskDetails.service.talent,
+          this.taskDetails.service.user,
+          "you need to pay " + this.form.value["cost"] + "$ for your " + this.taskDetails.service.occasion + " video my credit card number is " + this.form.value["card"],
+          "",
+          "payment"
         ),
         new Notification_(
           0,

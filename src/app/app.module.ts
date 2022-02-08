@@ -5,6 +5,8 @@ import { ReactiveFormsModule, FormsModule} from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { SwiperModule } from "swiper/angular"
+import { InAppBrowser } from "@awesome-cordova-plugins/in-app-browser/ngx"
+
 
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -53,7 +55,10 @@ import { ActivitiesComponent } from './components/activites/activites.component'
     ScrollingModule,
     SwiperModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
+  providers: [
+    InAppBrowser,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

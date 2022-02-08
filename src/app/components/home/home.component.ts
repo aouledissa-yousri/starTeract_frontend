@@ -23,11 +23,14 @@ export class HomeComponent implements OnInit {
   constructor(private api: ApiService, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter(){
     this.fetchCategories()
   }
 
   fetchTalents(){
-    this.api.getTalents().subscribe(data => {
+    this.api.getTalents(parseInt(localStorage.getItem("id"))).subscribe(data => {
       let classifications: Classification[] = data.classifications
       for(let i=0; i<classifications.length; i++){
         for(let j=0; j<this.containers.length; j++){
@@ -40,6 +43,7 @@ export class HomeComponent implements OnInit {
   }
 
   fetchCategories(){
+    this.containers = []
     this.api.getCategories().subscribe(data => {
       for(let i=0; i<data.length; i++){
         this.containers.push(new Container(data[i], []))
