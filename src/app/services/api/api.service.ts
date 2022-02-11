@@ -94,7 +94,7 @@ export class ApiService {
     return this.http.post(URL+"/api/deleteActivity/",{"id": id})
   }
 
-  addVideo(video: FormData){
+  addVideo(video: FormData): Observable<any>{
     return this.http.post(URL+"/api/addVideo/", video)
   }
 
@@ -102,8 +102,12 @@ export class ApiService {
     return this.http.post(URL+"/api/uploadImage/"+id+"/", image)
   }
 
-  postReview(review: Review){
+  postReview(review: Review): Observable<any>{
     return this.http.post(URL+"/api/addReview/", review)
+  }
+
+  getVideos(id: number): Observable<Video[]>{
+    return this.http.get<Video[]>(URL+"/api/getVideos/"+id+"/")
   }
 
 }

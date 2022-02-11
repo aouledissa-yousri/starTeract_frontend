@@ -4,6 +4,8 @@ export class Video{
         public title: string,
         public user: number,
         public talent: number,
-        public video: File
+        public source: string,
+        public volume: string,
+        public state: string
     ){}
 }

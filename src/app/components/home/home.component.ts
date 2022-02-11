@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
 
   ionViewWillEnter(){
     this.fetchCategories()
+    console.log(this.containers)
   }
 
   fetchTalents(){

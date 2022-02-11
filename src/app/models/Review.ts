@@ -12,6 +12,7 @@ export class ReviewDisplay{
         public comment: string,
         public rating: number, 
         public user: number,
+        public talent: number,
         public userImage: string,
         public username: string
     ){}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertController } from '@ionic/angular';
 import { Activity } from 'src/app/models/Activity';
 import { Notification_ } from 'src/app/models/Notification';
 import { Video } from 'src/app/models/Video';
@@ -20,7 +21,7 @@ export class ActivitiesComponent implements OnInit {
   selectedVideo: File = null
   form = new FormGroup({})
 
-  constructor(private api: ApiService, private builder: FormBuilder) { }
+  constructor(private api: ApiService, private builder: FormBuilder, private alert: AlertController) { }
 
   ngOnInit() {
     this.getActivities()
@@ -84,8 +85,18 @@ export class ActivitiesComponent implements OnInit {
     formData.append("talent", String(this.activityDetails.receiver))
     formData.append("user", String(this.activityDetails.emitter))
     this.api.addVideo(formData).subscribe(data => {
-      console.log(data)
-    })
+      if(data.message){
+        this.success()
+        this.activities.splice(this.index,1)
+        this.api.deleteActivity(this.activityDetails.id).subscribe()
+        this.closeModal2()
+        this.closeModal()
+      }else{
+        this.failure()
+      }
+    },
+    error => this.failure()
+    )
 
     this.api.sendNotification(
       new Notification_(
@@ -100,4 +111,36 @@ export class ActivitiesComponent implements OnInit {
     ).subscribe()
   }
 
+  async success(){
+    await this.alert.create({
+      header: "Video uploaded successfully",
+      cssClass: "content-dialogue",
+      message: "your video was uploaded successfully",
+      buttons: [
+        { 
+          cssClass: "exit-dialogue",
+          text: "OK"
+        }
+      ]
+    }).then(box => box.present())
+    this.form.reset({})
+  }
+
+  async failure(){
+    await this.alert.create({
+      header: "Failure",
+      cssClass: "content-dialogue",
+      message: "An error occurred please try again later",
+      buttons: [
+        { 
+          cssClass: "exit-dialogue",
+          text: "OK"
+        }
+      ]
+    }).then(box => box.present())
+    this.form.reset({})
+  }
+
 }
+
+

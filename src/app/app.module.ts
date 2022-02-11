@@ -6,6 +6,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { SwiperModule } from "swiper/angular"
 import { InAppBrowser } from "@awesome-cordova-plugins/in-app-browser/ngx"
+import { VideoPlayer } from "@awesome-cordova-plugins/video-player/ngx"
+
 
 
 
@@ -57,7 +59,8 @@ import { ActivitiesComponent } from './components/activites/activites.component'
   ],
   providers: [
     InAppBrowser,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
+    VideoPlayer,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
   ],
   bootstrap: [AppComponent],
 })

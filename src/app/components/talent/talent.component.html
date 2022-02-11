@@ -1,4 +1,4 @@
-<div class = "container" [ngClass] = "{'not-bright': isModalOpen}" >
+<div class = "container" [ngClass] = "{'not-bright': isModalOpen}">
   <ion-icon name = "chevron-back" style = "font-size: 30px" color= "primary" (click) = "back()"></ion-icon>
   
 
@@ -22,10 +22,19 @@
         <ng-container *ngFor = "let category of talentDetails.categories">
           <span class = "font-responsive-category">{{category.name}}</span> &nbsp; &nbsp;
         </ng-container>
-    </div><br>
+    </div><br><br><br><br>
 
-    <div class = "videos">
+    <div class = "videos" style = "padding: 0;">
       <h5 class = "font-responsive">Videos</h5>
+      <swiper #swiper [config] = "config">
+        <ng-template swiperSlide *ngFor = "let video of videos; index as i">
+            <ion-icon [name] = "videos[i].state" class = "control" color = "light" (click) = "stopOrPlay(video)" ></ion-icon>
+            <ion-icon [name] = "videos[i].volume" class = "control volume" color = "light" (click) = "muteOrEnable(video)"></ion-icon>
+            <video #video class = "video" autoplay [muted] = "true" loop (click) = "fullScreen(video)" [id] = "i" [controls] = "videos[video.id].controls">
+              <source [src] = "videos[i].source" type = "video/mp4">
+            </video>
+        </ng-template>
+      </swiper>
     </div>
 
     <div class = "description font-responsive-category">
@@ -35,7 +44,7 @@
     <div class = "reviews">
       <h1>Reviews</h1>
       <ng-container *ngFor = "let review of reviews.content">
-        <div class = "comment">
+        <div class = "comment" *ngIf = "review !== undefined">
           <div style = "float: right">
             <ng-container *ngFor = "let number of [1,2,3,4,5]">
               <ion-icon name = "star" color = "warning" *ngIf = "number <= review.rating"></ion-icon>
@@ -141,11 +150,32 @@
       </div>
     </ng-template>
   </ion-modal>
+
+  <ion-modal [isOpen] = "isModal4Open" class = "half">
+    <ng-template>
+      <div class = "container">
+        <div (click) = "closeModal4()">
+          <ion-icon class = "exit" name = "close"></ion-icon>
+        </div>
+        <div>
+          <ion-icon color = "primary" name = "calendar-clear" style = "float: left; font-size: 150%"></ion-icon> &nbsp;
+          Make your request to a star you choose
+        </div><br><br>
+        <div>
+          <ion-icon color = "primary" name = "notifications" style = "float: left; font-size: 150%"></ion-icon> &nbsp;
+          <p style = "margin-left: 10%; margin-bottom: 5%;">
+            A notification will be sent to you once a celebrity makes a response
+          </p>
+        </div>
+
+      </div>
+    </ng-template>
+  </ion-modal>
 </div>
 
 <div class = "button-container">
   <ion-button class = "button" (click) = "openModal()" type = "button">Book Now</ion-button>
-    <ion-button color = "primary-contrast" class = "button2" type = "button">
+    <ion-button color = "primary-contrast" class = "button2" type = "button" (click) = "openModal4()">
       <ion-icon name = "alert-circle" color = "dark"></ion-icon>
     </ion-button>
 </div>

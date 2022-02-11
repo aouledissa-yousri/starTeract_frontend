@@ -37,7 +37,7 @@
     animation: fade 1s;
     height: 100%;
     padding-bottom: 100px;
-    width: fit-content
+    width: 100%;
 }
 
 
@@ -139,8 +139,8 @@
 }
 
 .make-review{
-    position: absolute;
-    right: 7%;
+    position: relative;
+    left: 90%;
 }
 
 .stars{
@@ -163,6 +163,28 @@
     width: 92vw;
     border-radius: 10px;
     margin-bottom: 3%;
+}
+
+.video{
+    position: static; 
+    height: 300px; 
+    width: 168px; 
+    margin: 0;
+    display: inline-block;
+    border-radius: 6%;
+    z-index: -1
+}
+
+.control{
+    z-index: 999; 
+    top: 20px; 
+    position: absolute;
+    font-size: 24px;
+    font-weight: bold
+}
+
+.volume {
+    left: 140px;
 }
 
 
