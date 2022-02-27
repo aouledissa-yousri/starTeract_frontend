@@ -176,7 +176,8 @@ export class TalentComponent implements OnInit {
         this.form.value["occasion"],
         type,
         parseInt(localStorage.getItem("id")),
-        parseInt(localStorage.getItem("talent_id"))
+        parseInt(localStorage.getItem("talent_id")),
+        false
       ),
       new Notification_(
         0,
@@ -244,6 +245,15 @@ export class TalentComponent implements OnInit {
         this.ratingForm.value["rating"],
         parseInt(localStorage.getItem("id")),
         parseInt(localStorage.getItem("talent_id"))
+      ),
+
+      new Notification_(
+        0,
+        localStorage.getItem("name") + " posted a new review",
+        false,
+        parseInt(localStorage.getItem("talent_id")),
+        parseInt(localStorage.getItem("id")),
+        ""
       )
     ).subscribe(data => {
       if(data.message){
@@ -273,7 +283,7 @@ export class TalentComponent implements OnInit {
 
   async reviewFail(){
     await this.alert.create({
-      header: "Review submitted",
+      header: "Review was not submitted",
       cssClass: "content-dialogue",
       message: "An error occurred please try again later",
       buttons: [

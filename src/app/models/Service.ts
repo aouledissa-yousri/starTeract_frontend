@@ -5,6 +5,7 @@ export class Service{
         public occasion: string,
         public type: string,
         public user: number,
-        public talent: number
+        public talent: number,
+        public checked: boolean
     ){}
 }

@@ -52,11 +52,16 @@
         </ion-item>
 
         <ion-item [hidden] = "form.value['free']"> 
-          <ion-input placeholder = "Enter credit card number"  formControlName = "card"></ion-input>
+          <ion-input placeholder = "Enter Konnect wallet id"  formControlName = "wallet"></ion-input>
         </ion-item>
 
+        <div style = "text-align: center">
+          <span>don't have a Konnect account?</span> &nbsp;
+          <ion-text color = "primary"(click) = "KonnectSignUp()">Sign Up to Konnect</ion-text>
+        </div>
+
         <ion-item [hidden] = "form.value['free']"> 
-          <ion-input placeholder = "Enter cost in dollars($)" formControlName = "cost" type= "number"></ion-input>
+          <ion-input placeholder = "Enter cost in {{token}} (minimum 100 {{token}})" formControlName = "cost" type= "number"></ion-input>
         </ion-item>
         <ion-button type = "submit" [disabled] = "!valid()" expand = "full">Confirm</ion-button>
       </form>

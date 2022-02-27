@@ -33,8 +33,8 @@
         <h4>from {{activityDetails.name}}</h4>
         <p>{{activityDetails.task}}</p>
         <div class = "btn-container">
-          <ion-button color = "primary" class = "btn" (click) = "accept()">Proceed</ion-button>
-          <ion-button color = "medium" class = "btn" (click) = "cancel()">Cancel</ion-button>
+          <ion-button color = "primary" class = "btn" (click) = "accept()" style = "margin-left: 20%">Proceed</ion-button>
+          <ion-button color = "medium" class = "btn" (click) = "cancel()" *ngIf = "activityDetails.type === 'payment'">Cancel</ion-button>
         </div>
       </div>
 

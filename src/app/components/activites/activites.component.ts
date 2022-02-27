@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { AlertController } from '@ionic/angular';
 import { Activity } from 'src/app/models/Activity';
 import { Notification_ } from 'src/app/models/Notification';
@@ -21,7 +22,7 @@ export class ActivitiesComponent implements OnInit {
   selectedVideo: File = null
   form = new FormGroup({})
 
-  constructor(private api: ApiService, private builder: FormBuilder, private alert: AlertController) { }
+  constructor(private api: ApiService, private builder: FormBuilder, private alert: AlertController, private browser: InAppBrowser) { }
 
   ngOnInit() {
     this.getActivities()
@@ -56,9 +57,28 @@ export class ActivitiesComponent implements OnInit {
     this.isModal2Open = false
   }
 
+  
+
   accept(){
     if(this.activityDetails.type == "video")
       this.openModal2()
+    else{
+      this.api.getPaymentLink(this.activityDetails.id).subscribe( data => {
+        const browser = this.browser.create(data.link, "_blank")
+        browser.on("loadstart").subscribe(event => {
+          if(event.url == "https://konnect.network/gateway/payment-success"){
+            this.activities.splice(this.index,1)
+            this.api.deleteActivity(this.activityDetails.id).subscribe()
+            this.closeModal2()
+            this.closeModal()
+            browser.close()
+          }
+        })
+        browser.on("exit").subscribe(event => {
+          browser.close()
+        })
+      })
+    }
   }
 
   cancel(){

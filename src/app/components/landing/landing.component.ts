@@ -77,19 +77,21 @@ export class LandingComponent implements OnInit {
 
 
   normalSignUp(){
-    this.closeModal()
+    /*this.closeModal()
     let self = this
     setTimeout(function(){
       self.router.navigate(["signUp"])
-    }, 1)
+    }, 1)*/
+    this.router.navigate(["signUp"])
   }
 
   login(){
-    this.closeModal()
+    /*this.closeModal()
     let self = this
     setTimeout(function(){
       self.router.navigate(["login"])
-    }, 1)
+    }, 1)*/
+    this.router.navigate(["login"])
   }
 
   private stopLoading(){

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Activity } from 'src/app/models/Activity';
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { AlertController } from '@ionic/angular';
+import { Activity, PaymentActivity } from 'src/app/models/Activity';
 import { Notification_ } from 'src/app/models/Notification';
+import { PaymentDetails } from 'src/app/models/PaymentDetails';
 import { Service } from 'src/app/models/Service';
 import { ServiceEmitter, Task } from 'src/app/models/Task';
 import { ApiService } from 'src/app/services/api/api.service';
@@ -17,10 +20,11 @@ export class TasksComponent implements OnInit {
   isModalOpen = false
   isModal2Open = false
   index = 0
-  taskDetails: Task = new Task(new Service(0,"","","",0,0), new ServiceEmitter("",""))
+  taskDetails: Task = new Task(new Service(0,"","","",0,0, false), new ServiceEmitter("",""))
   form: FormGroup = new FormGroup({})
+  token = ""
 
-  constructor(private api: ApiService, private builder: FormBuilder) { }
+  constructor(private api: ApiService, private builder: FormBuilder, private browser: InAppBrowser, private alert: AlertController) { }
 
   ngOnInit() {
     this.initForm()
@@ -30,6 +34,7 @@ export class TasksComponent implements OnInit {
   ionViewWillEnter(){
     this.getTasks()
     this.initForm()
+    this.getToken()
   }
 
   getTasks(){
@@ -50,7 +55,7 @@ export class TasksComponent implements OnInit {
           )
         ))
       }*/
-      this.tasks = data
+      this.tasks = data.services
     })
   }
 
@@ -96,13 +101,13 @@ export class TasksComponent implements OnInit {
   private initForm(){
     this.form = this.builder.group({
       free: [false],
-      card: [],
+      wallet: [],
       cost: []
     })
   }
 
   valid(){
-    return this.form.value["free"] || (!this.form.value["free"] && this.form.value["card"] != null && this.form.value["cost"] != null)
+    return this.form.value["free"] || (!this.form.value["free"] && this.form.value["wallet"] != null && this.form.value["cost"] != null && this.form.value["cost"] >= 100)
   }
 
   submit(){
@@ -133,28 +138,97 @@ export class TasksComponent implements OnInit {
 
       
     }else{
-      this.api.sendActivity(
-        new Activity(
-          0,
-          this.taskDetails.service.talent,
-          this.taskDetails.service.user,
-          "you need to pay " + this.form.value["cost"] + "$ for your " + this.taskDetails.service.occasion + " video my credit card number is " + this.form.value["card"],
-          "",
-          "payment"
-        ),
-        new Notification_(
-          0,
-          localStorage.getItem("name") + " will make you a(n) " + this.taskDetails.service.occasion + " video for " + this.form.value["cost"] + "$",
-          false,
-          this.taskDetails.service.user,
-          this.taskDetails.service.talent,
-          ""
-        ),
-        this.taskDetails.service.id
-      ).subscribe()
+      this.createPaymentLink()
     }
     this.tasks.splice(this.index,1)
     this.closeModal2()
+  }
+
+  KonnectSignUp(){
+    const browser = this.browser.create("https://konnect.network/admin/register")
+    browser.on("exit").subscribe(event => {
+      browser.close()
+    })
+  }
+
+  private createPaymentLink(){
+    this.api.createPaymentLink(new PaymentDetails(
+      this.form.value["wallet"],
+      this.form.value["cost"],
+      this.token
+    )).subscribe(
+      data => {
+        this.success()
+        this.api.sendActivity(
+          new PaymentActivity(
+            0,
+            this.taskDetails.service.talent,
+            this.taskDetails.service.user,
+            "you need to pay " + this.form.value["cost"] + " " + this.token + " for your " + this.taskDetails.service.occasion + " video",
+            "",
+            "payment",
+            data.paymentLink.link
+          ),
+          new Notification_(
+            0,
+            localStorage.getItem("name") + " will make you a(n) " + this.taskDetails.service.occasion + " video for " + this.form.value["cost"] + " " + this.token,
+            false,
+            this.taskDetails.service.user,
+            this.taskDetails.service.talent,
+            ""
+          ),
+          this.taskDetails.service.id
+        ).subscribe()
+      },
+      error => this.failure()
+    )
+  }
+
+  private getToken(){
+    fetch("assets/countries_currency.json")
+      .then(response => {
+        return response.json()
+      })
+      .then(countryData => {
+        this.api.getTalentData(localStorage.getItem("name")).subscribe(data => {
+          for(let i=0; i<countryData.length; i++){
+            if(countryData[i].country == data.country){
+              this.token = countryData[i].currency_iso_3_char_code
+              return
+            }
+          }
+        })
+      })
+  }
+
+  async success(){
+    await this.alert.create({
+      header: "Completed",
+      cssClass: "content-dialogue",
+      message: "a notification is sent to your client",
+      buttons: [
+        { 
+          cssClass: "exit-dialogue",
+          text: "OK"
+        }
+      ]
+    }).then(box => box.present())
+    this.form.reset({})
+  }
+
+  async failure(){
+    await this.alert.create({
+      header: "Failure",
+      cssClass: "content-dialogue",
+      message: "An error occurred please try again later",
+      buttons: [
+        { 
+          cssClass: "exit-dialogue",
+          text: "OK"
+        }
+      ]
+    }).then(box => box.present())
+    this.form.reset({})
   }
 
 }

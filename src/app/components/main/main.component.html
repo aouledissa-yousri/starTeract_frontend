@@ -1,3 +1,4 @@
+
 <ion-router-outlet></ion-router-outlet>
 <ion-tabs>
   <ion-tab-bar slot = "bottom" style = "background: rgb(255, 255, 255);">
@@ -12,8 +13,7 @@
     </ion-tab-button>
 
     <ion-tab-button tab="notifications" (click) = "checkNotifications()">
-      <ion-icon name="notifications">
-      </ion-icon>
+      <ion-icon name="notifications"></ion-icon>
       <ion-badge color = "danger" *ngIf = "unchecked > 0">{{unchecked}}</ion-badge>
       <ion-label>notifications</ion-label>
     </ion-tab-button>
@@ -21,11 +21,13 @@
 
     <ion-tab-button tab="tasks" *ngIf = "isTalent">
       <ion-icon name="globe-sharp"></ion-icon>
+      <!--<ion-badge color = "danger" *ngIf = "unchecked_services > 0" >{{unchecked_services}}</ion-badge>-->
       <ion-label>Tasks</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="activities">
       <ion-icon name="navigate-sharp"></ion-icon>
+      
       <ion-label>Activities</ion-label>
     </ion-tab-button>
 
