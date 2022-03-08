@@ -21,6 +21,7 @@ export class RegisterTalentComponent implements OnInit {
   countries: Country[] = []
   selectedCountry: Country = new Country(0,"","","","")
   categories: Category[] = []
+  country: string
 
   constructor(private build: FormBuilder, private router: Router, private api: ApiService, private alert: AlertController) { }
 

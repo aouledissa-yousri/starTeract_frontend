@@ -12,7 +12,7 @@
           <ion-icon name = "star" color = "warning"></ion-icon>&nbsp;
           <span class = "font-responsive">{{talentDetails.rating | number: '1.1-1'}}</span><br>
           <span class = "font-responsive">{{reviews.reviewNum}} Review(s)</span>
-          <ion-text class = "make-review" color = "primary" (click) = "openModal3()" [hidden] = "!canRate">Rate Talent</ion-text>
+          <ion-text class = "make-review" color = "primary" (click) = "openModal3()" [hidden] = "!canRate || !canBookService()">Rate Talent</ion-text>
         </div>
       </div>
       <img [src] = "talentDetails.image" class = "img">
@@ -174,8 +174,8 @@
 </div>
 
 <div class = "button-container">
-  <ion-button class = "button" (click) = "openModal()" type = "button">Book Now</ion-button>
-    <ion-button color = "primary-contrast" class = "button2" type = "button" (click) = "openModal4()">
+  <ion-button class = "button" (click) = "openModal()" type = "button" *ngIf = "canBookService()">Book Now</ion-button>
+    <ion-button color = "primary-contrast" class = "button2" type = "button" (click) = "openModal4()" *ngIf = "canBookService()">
       <ion-icon name = "alert-circle" color = "dark"></ion-icon>
     </ion-button>
 </div>

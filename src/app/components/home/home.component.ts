@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
     slidesPerView: 2.5,
     speed: 800
   }
+  talent: string = ""
   
 
   constructor(private api: ApiService, private router: Router) { }

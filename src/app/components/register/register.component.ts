@@ -18,6 +18,7 @@ export class RegisterComponent implements OnInit {
   form = new FormGroup({})
   link = "../../../assets/countries.json"
   countryListOpen = false
+  country: string
   countries: Country[] = []
   selectedCountry: Country = new Country(0,"","","","")
 

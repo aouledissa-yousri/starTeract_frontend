@@ -4,12 +4,12 @@
 <div [hidden] = "containers.length === 0" class = "container">
   <ion-item class = "search">
     <ion-icon name = "search"></ion-icon>
-    <ion-input placeholder = "search for a celebrity"></ion-input>
+    <ion-input placeholder = "search for a celebrity" [(ngModel)] = "talent"></ion-input>
   </ion-item><br><br>
   <ng-container *ngFor = "let container of containers">
     <h1>{{container.header.name}}</h1>
     <swiper #swiper [config] = "config">
-      <ng-template swiperSlide *ngFor = "let talent of container.talents" class = "talent">
+      <ng-template swiperSlide *ngFor = "let talent of container.talents | talentFilter: talent" class = "talent">
           <div *ngIf = "talent !== undefined" (click) = "talentDetails(talent.name)" class = "t-container">
             <img [src] = "talent.image" class = "img"><br>
             <span style = "margin-left: 0px;  font-weight: bold">{{talent.name}}</span>

@@ -330,5 +330,9 @@ export class TalentComponent implements OnInit {
     })
   }
 
+  canBookService(){
+    return localStorage.getItem("id") != localStorage.getItem("talent_id")
+  }
+
 
 }

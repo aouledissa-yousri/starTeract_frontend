@@ -28,6 +28,7 @@ import { NotificationsComponent } from './components/notifications/notifications
 import { TalentComponent } from './components/talent/talent.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { ActivitiesComponent } from './components/activites/activites.component';
+import { TalentFilterPipe } from './pipes/talentFilter/talent-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ActivitiesComponent } from './components/activites/activites.component'
     NotificationsComponent,
     TalentComponent,
     TasksComponent,
-    ActivitiesComponent
+    ActivitiesComponent,
+    TalentFilterPipe
   ],
   entryComponents: [],
   imports: [

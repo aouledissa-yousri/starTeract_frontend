@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/ic_starteract">
 
-    <WebView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+  <WebView
+    android:layout_width="339dp"
+    android:layout_height="639dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
